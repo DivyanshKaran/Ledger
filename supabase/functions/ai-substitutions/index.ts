@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { ApiError, fetchWithRetry, getAiConfig } from "../_shared/ai-client.ts";
 import { buildCorsHeaders, getRequestContext, isAllowedOrigin, isAuthenticatedRequest, logError, logInfo, responseWithRequestId } from "../_shared/observability.ts";
 import { checkRateLimit } from "../_shared/rate-limit.ts";
@@ -7,7 +6,7 @@ import { parseJsonBody, validateSubstitutionPayload } from "../_shared/validatio
 const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 30;
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   const ctx = getRequestContext(req);
   const corsHeaders = buildCorsHeaders(req);
 

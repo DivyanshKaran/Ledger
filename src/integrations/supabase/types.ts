@@ -10,7 +10,32 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.1"
+    PostgrestVersion: "14.4"
+  }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
   public: {
     Tables: {
@@ -19,7 +44,8 @@ export type Database = {
           activity_type: string
           created_at: string
           id: string
-          metadata: Json | null
+          is_public: boolean
+          metadata: Json
           target_id: string | null
           user_id: string
         }
@@ -27,7 +53,8 @@ export type Database = {
           activity_type: string
           created_at?: string
           id?: string
-          metadata?: Json | null
+          is_public?: boolean
+          metadata?: Json
           target_id?: string | null
           user_id: string
         }
@@ -35,9 +62,31 @@ export type Database = {
           activity_type?: string
           created_at?: string
           id?: string
-          metadata?: Json | null
+          is_public?: boolean
+          metadata?: Json
           target_id?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits: {
+        Row: {
+          key: string
+          request_count: number
+          updated_at: string
+          window_start: string
+        }
+        Insert: {
+          key: string
+          request_count?: number
+          updated_at?: string
+          window_start: string
+        }
+        Update: {
+          key?: string
+          request_count?: number
+          updated_at?: string
+          window_start?: string
         }
         Relationships: []
       }
@@ -102,6 +151,7 @@ export type Database = {
       }
       custom_recipes: {
         Row: {
+          cook_time: number
           created_at: string
           cuisine: string
           description: string | null
@@ -111,6 +161,7 @@ export type Database = {
           ingredients: Json
           is_public: boolean | null
           nutrition: Json | null
+          prep_time: number
           servings: number
           steps: Json
           tags: string[] | null
@@ -119,6 +170,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          cook_time?: number
           created_at?: string
           cuisine?: string
           description?: string | null
@@ -128,6 +180,7 @@ export type Database = {
           ingredients?: Json
           is_public?: boolean | null
           nutrition?: Json | null
+          prep_time?: number
           servings?: number
           steps?: Json
           tags?: string[] | null
@@ -136,6 +189,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          cook_time?: number
           created_at?: string
           cuisine?: string
           description?: string | null
@@ -145,6 +199,7 @@ export type Database = {
           ingredients?: Json
           is_public?: boolean | null
           nutrition?: Json | null
+          prep_time?: number
           servings?: number
           steps?: Json
           tags?: string[] | null
@@ -227,6 +282,7 @@ export type Database = {
           created_at: string
           display_name: string | null
           id: string
+          is_public: boolean
           is_verified: boolean | null
           location: string | null
           updated_at: string
@@ -239,6 +295,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          is_public?: boolean
           is_verified?: boolean | null
           location?: string | null
           updated_at?: string
@@ -251,6 +308,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          is_public?: boolean
           is_verified?: boolean | null
           location?: string | null
           updated_at?: string
@@ -464,12 +522,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_rate_limit: {
+        Args: { p_key: string; p_limit: number; p_window_ms: number }
+        Returns: Json
+      }
+      cleanup_api_rate_limits: { Args: { p_ttl?: string }; Returns: number }
       get_shared_recipe_by_code: {
         Args: { p_share_code: string }
         Returns: {
           created_at: string
-          preset_recipe_id: string | null
-          recipe_id: string | null
+          preset_recipe_id: string
+          recipe_id: string
           share_code: string
         }[]
       }
@@ -481,8 +544,8 @@ export type Database = {
         Args: { p_share_code: string; p_share_secret_hash: string }
         Returns: {
           created_at: string
-          preset_recipe_id: string | null
-          recipe_id: string | null
+          preset_recipe_id: string
+          recipe_id: string
           share_code: string
         }[]
       }
@@ -614,6 +677,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

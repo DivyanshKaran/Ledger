@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { ApiError } from "../_shared/ai-client.ts";
 import {
   buildCorsHeaders,
@@ -63,7 +62,7 @@ async function callRpc<T>(
   return await response.json() as T;
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   const ctx = getRequestContext(req);
   const corsHeaders = buildCorsHeaders(req);
 

@@ -4,7 +4,7 @@ ALTER TABLE public.shared_recipes
 ADD COLUMN IF NOT EXISTS share_secret_hash text;
 
 UPDATE public.shared_recipes
-SET share_secret_hash = encode(digest(gen_random_uuid()::text, 'sha256'), 'hex')
+SET share_secret_hash = encode(extensions.digest(gen_random_uuid()::text, 'sha256'), 'hex')
 WHERE share_secret_hash IS NULL;
 
 ALTER TABLE public.shared_recipes
@@ -67,3 +67,30 @@ $$;
 
 REVOKE ALL ON FUNCTION public.lookup_shared_recipe_and_increment(text, text) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.lookup_shared_recipe_and_increment(text, text) TO anon, authenticated, service_role;
+
+-- Recreate the insert policy now that share_secret_hash column exists
+DROP POLICY IF EXISTS "Users can share their own recipes" ON public.shared_recipes;
+
+CREATE POLICY "Users can share their own recipes"
+ON public.shared_recipes
+FOR INSERT
+WITH CHECK (
+  auth.uid() = shared_by
+  AND share_secret_hash ~ '^[0-9a-f]{64}$'
+  AND (
+    (
+      recipe_id IS NOT NULL
+      AND preset_recipe_id IS NULL
+      AND EXISTS (
+        SELECT 1
+        FROM public.custom_recipes cr
+        WHERE cr.id = recipe_id
+          AND cr.user_id = auth.uid()
+      )
+    )
+    OR (
+      recipe_id IS NULL
+      AND preset_recipe_id IS NOT NULL
+    )
+  )
+);

@@ -5,7 +5,6 @@ ON public.shared_recipes
 FOR INSERT
 WITH CHECK (
   auth.uid() = shared_by
-  AND share_secret_hash ~ '^[0-9a-f]{64}$'
   AND (
     (
       recipe_id IS NOT NULL
