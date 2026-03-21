@@ -1,0 +1,17 @@
+{
+  "name": "Ledger",
+  "short_name": "Ledger",
+  "description": "Calculate recipe costs, plan budget-friendly meals, and cook with confidence.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9F5EC",
+  "theme_color": "#E9A23B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

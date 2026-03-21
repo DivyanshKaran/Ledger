@@ -1,0 +1,3 @@
+ALTER TABLE custom_recipes
+  ADD COLUMN IF NOT EXISTS prep_time integer NOT NULL DEFAULT 15,
+  ADD COLUMN IF NOT EXISTS cook_time integer NOT NULL DEFAULT 30;

@@ -1,0 +1,10 @@
+project_id = "weehewlovvhkfquurkln"
+
+[functions.ai-cooking-assistant]
+verify_jwt = true
+
+[functions.ai-substitutions]
+verify_jwt = true
+
+[functions.shared-recipe]
+verify_jwt = false
