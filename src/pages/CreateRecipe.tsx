@@ -161,7 +161,7 @@ export default function CreateRecipe() {
         </div>
 
         {/* Section Tabs */}
-        <div className="flex gap-1.5 sm:gap-2 mb-6 sm:mb-8 overflow-x-auto pb-2 scrollbar-thin">
+        <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
           {sections.map((section) => {
             const Icon = section.icon;
             return (

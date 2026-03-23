@@ -73,7 +73,7 @@ export default function CTASection() {
           {user ? (
             <Button
               size="lg"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/dashboard")}
               className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-base px-8 h-14 shadow-xl gap-2 w-full sm:w-auto"
             >
               Go to Your Dashboard

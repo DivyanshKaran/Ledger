@@ -45,6 +45,8 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
   const maxTime = Math.max(...data.map(d => d.totalMinutes));
 
   const colors = ["hsl(var(--primary))", "hsl(var(--accent))", "hsl(150, 60%, 45%)"];
+  const columnCount = recipes.length;
+  const gridTemplateColumns = `repeat(${columnCount}, minmax(0, 1fr))`;
 
   return (
     <motion.div
@@ -71,7 +73,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
 
         <div className="p-4 sm:p-6">
           {/* Recipe Headers */}
-          <div className={`grid grid-cols-${recipes.length} gap-4 mb-8`}>
+          <div className="grid gap-4 mb-8" style={{ gridTemplateColumns }}>
             {data.map((d, i) => (
               <div key={d.recipe.id} className="text-center">
                 <div className="relative inline-block">
@@ -103,6 +105,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 color: colors[i],
                 isBest: d.totalCost === Math.min(...data.map(x => x.totalCost)),
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             <ComparisonRow
@@ -114,6 +117,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 color: colors[i],
                 isBest: d.costPerServing === Math.min(...data.map(x => x.costPerServing)),
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             {/* Time */}
@@ -126,6 +130,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 color: colors[i],
                 isBest: d.totalMinutes === Math.min(...data.map(x => x.totalMinutes)),
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             {/* Calories */}
@@ -138,6 +143,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 color: colors[i],
                 isBest: d.totalCalories === Math.min(...data.map(x => x.totalCalories)),
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             {/* Protein */}
@@ -150,6 +156,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 color: colors[i],
                 isBest: d.protein === Math.max(...data.map(x => x.protein)),
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             {/* Servings */}
@@ -161,6 +168,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 percentage: (d.recipe.servings / Math.max(...data.map(x => x.recipe.servings))) * 100,
                 color: colors[i],
               }))}
+              gridTemplateColumns={gridTemplateColumns}
             />
 
             {/* Difficulty */}
@@ -169,7 +177,7 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
                 <ChefHat className="w-4 h-4 text-muted-foreground" />
                 Difficulty
               </div>
-              <div className={`grid grid-cols-${recipes.length} gap-4`}>
+              <div className="grid gap-4" style={{ gridTemplateColumns }}>
                 {data.map((d) => (
                   <div key={d.recipe.id} className="text-center">
                     <Badge variant="outline" className="text-xs">
@@ -186,10 +194,11 @@ export default function RecipeComparison({ recipes, onClose, onRemoveRecipe }: R
   );
 }
 
-function ComparisonRow({ icon, label, items }: {
+function ComparisonRow({ icon, label, items, gridTemplateColumns }: {
   icon: React.ReactNode;
   label: string;
   items: { value: string; percentage: number; color: string; isBest?: boolean }[];
+  gridTemplateColumns: string;
 }) {
   return (
     <div className="bg-muted/30 rounded-xl p-4">
@@ -197,7 +206,7 @@ function ComparisonRow({ icon, label, items }: {
         {icon}
         {label}
       </div>
-      <div className={`grid gap-3`} style={{ gridTemplateColumns: `repeat(${items.length}, 1fr)` }}>
+      <div className="grid gap-3" style={{ gridTemplateColumns }}>
         {items.map((item, i) => (
           <div key={i}>
             <div className="flex items-center gap-2 mb-1">

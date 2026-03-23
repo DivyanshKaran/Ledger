@@ -217,30 +217,34 @@ export default function ShoppingListGenerator({
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.02 }}
-                  className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
+                  className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 rounded-lg border transition-all ${
                     checkedItems.has(item.name) 
                       ? "bg-muted/50 border-border/50" 
                       : "bg-card border-border hover:border-primary/30"
                   }`}
                 >
-                  <Checkbox
-                    checked={checkedItems.has(item.name)}
-                    onCheckedChange={() => toggleItem(item.name)}
-                    className="h-5 w-5"
-                  />
-                  <span className={`flex-1 font-medium ${
-                    checkedItems.has(item.name) ? "line-through text-muted-foreground" : ""
-                  }`}>
-                    {item.name}
-                  </span>
-                  <span className="text-sm text-muted-foreground whitespace-nowrap">
-                    {item.quantity.toFixed(1)} {item.unit}
-                  </span>
-                  <span className={`text-sm font-semibold whitespace-nowrap ${
-                    checkedItems.has(item.name) ? "text-muted-foreground" : "text-primary"
-                  }`}>
-                    {formatPrice(item.totalPrice)}
-                  </span>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Checkbox
+                      checked={checkedItems.has(item.name)}
+                      onCheckedChange={() => toggleItem(item.name)}
+                      className="h-5 w-5"
+                    />
+                    <span className={`flex-1 font-medium break-words sm:truncate ${
+                      checkedItems.has(item.name) ? "line-through text-muted-foreground" : ""
+                    }`}>
+                      {item.name}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 text-sm">
+                    <span className="text-muted-foreground whitespace-nowrap">
+                      {item.quantity.toFixed(1)} {item.unit}
+                    </span>
+                    <span className={`font-semibold whitespace-nowrap ${
+                      checkedItems.has(item.name) ? "text-muted-foreground" : "text-primary"
+                    }`}>
+                      {formatPrice(item.totalPrice)}
+                    </span>
+                  </div>
                 </motion.div>
               ))}
             </div>

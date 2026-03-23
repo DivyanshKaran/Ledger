@@ -1,18 +1,19 @@
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import PageSkeleton from "@/components/PageSkeleton";
+import PageSkeleton, { PageSkeletonVariant } from "@/components/PageSkeleton";
 
 interface ProtectedRouteProps {
   children: ReactNode;
+  skeletonVariant?: PageSkeletonVariant;
 }
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+export default function ProtectedRoute({ children, skeletonVariant = "default" }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
-    return <PageSkeleton variant="default" />;
+    return <PageSkeleton variant={skeletonVariant} />;
   }
 
   if (!user) {

@@ -189,14 +189,14 @@ export default function RecipeDetail({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-3 relative rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl"
+            className="lg:col-span-3 relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-warm-lg border border-border/60 image-shell"
           >
             <img
               src={imageUrl}
               alt={recipe.title}
               className="w-full aspect-[16/10] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-4">
                   {recipe.difficulty && (
@@ -217,7 +217,7 @@ export default function RecipeDetail({
                     </Badge>
                   )}
                 </div>
-              <h1 className="font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-background mb-2 sm:mb-3 line-clamp-2">
+              <h1 className="font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-background mb-2 sm:mb-3 line-clamp-2 text-shadow-soft">
                 {recipe.title}
               </h1>
               
@@ -240,7 +240,7 @@ export default function RecipeDetail({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="grid grid-cols-3 gap-2 sm:gap-3"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3"
             >
               {[
                 { label: "Prep", value: recipe.prepTime },
@@ -323,7 +323,7 @@ export default function RecipeDetail({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
-              className="bg-gradient-to-br from-primary to-primary/80 rounded-lg sm:rounded-xl p-4 sm:p-6 text-primary-foreground shadow-lg shadow-primary/20"
+              className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-4 sm:p-6 text-primary-foreground shadow-warm-lg price-sheen"
             >
               <div className="flex items-start justify-between">
                 <div>
@@ -358,7 +358,7 @@ export default function RecipeDetail({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="flex items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide"
+          className="flex flex-wrap items-center gap-2 mb-6 sm:mb-8"
         >
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -385,7 +385,7 @@ export default function RecipeDetail({
 
           {/* Price Editor Button */}
           {user && activeTab === "ingredients" && (
-            <div className="ml-auto flex-shrink-0">
+            <div className="w-full sm:w-auto sm:ml-auto">
               <PriceEditor 
                 ingredients={recipe.ingredients}
                 onPricesUpdated={() => setPriceVersion(v => v + 1)}
@@ -491,7 +491,7 @@ export default function RecipeDetail({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="max-w-lg mx-auto"
+              className="max-w-4xl mx-auto"
             >
               <NutritionPanel 
                 nutrition={recipe.nutrition} 
@@ -507,7 +507,7 @@ export default function RecipeDetail({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="max-w-2xl mx-auto"
+              className="max-w-4xl mx-auto"
             >
               <RecipeReviews recipeId={recipe.id} />
             </motion.div>

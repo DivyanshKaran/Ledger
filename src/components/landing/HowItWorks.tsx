@@ -30,7 +30,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-12 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-muted/20">
+    <section id="how-it-works" className="py-14 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 bg-muted/20 border-y border-border/40">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -40,7 +40,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <span className="inline-block text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-4">
+          <span className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary/80 mb-4">
             Simple as 1-2-3-4
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-5">

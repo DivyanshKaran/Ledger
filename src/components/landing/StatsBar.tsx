@@ -13,7 +13,7 @@ export default function StatsBar() {
   ];
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-card/50 border-y border-border/50">
+    <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-card/50 border-y border-border/50">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {stats.map((stat, index) => {

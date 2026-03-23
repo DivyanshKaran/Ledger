@@ -169,7 +169,7 @@ export default function MealPlanner({ recipes, onClose, onSelectRecipe }: MealPl
       className="min-h-screen bg-background"
     >
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+      <div className="sticky top-14 sm:top-16 z-40 bg-background/90 backdrop-blur-lg border-b border-border/70">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-primary flex items-center justify-center">
@@ -223,7 +223,7 @@ export default function MealPlanner({ recipes, onClose, onSelectRecipe }: MealPl
         </div>
 
         {/* Week Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8">
           {DAYS_OF_WEEK.map((day, dayIndex) => (
             <motion.div
               key={day}
@@ -434,7 +434,7 @@ export default function MealPlanner({ recipes, onClose, onSelectRecipe }: MealPl
                      className="pl-9 h-10"
                    />
                  </div>
-                 <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                 <div className="flex flex-wrap gap-2 pb-1">
                    {cuisines.map((cuisine) => (
                      <Button
                        key={cuisine}

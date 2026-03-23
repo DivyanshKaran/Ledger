@@ -139,7 +139,7 @@ export default function Testimonials() {
   const displayed = !loading && liveReviews.length > 0 ? liveReviews : testimonials;
 
   return (
-    <section id="testimonials" className="py-12 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden">
+    <section id="testimonials" className="py-14 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 bg-muted/30 border-y border-border/40 relative overflow-hidden">
       {/* Decorative blurs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
@@ -153,7 +153,7 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-12 lg:mb-16"
         >
-          <span className="inline-block text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-4">
+          <span className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary/80 mb-4">
             Loved by home cooks
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-5 max-w-3xl mx-auto leading-tight">
@@ -175,13 +175,13 @@ export default function Testimonials() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="break-inside-avoid"
             >
-              <div className="bg-card rounded-2xl border border-border p-4 sm:p-6 lg:p-7 hover:border-primary/20 hover:shadow-warm transition-all duration-300 group">
+              <div className="bg-card rounded-2xl border border-border/70 p-4 sm:p-6 lg:p-7 shadow-warm hover:border-primary/20 hover:shadow-warm-lg transition-all duration-300 group">
                 {/* Quote icon */}
                 <Quote className="w-8 h-8 text-primary/15 mb-4 group-hover:text-primary/25 transition-colors" />
 
                 {/* Highlight badge */}
                 {"highlight" in testimonial && testimonial.highlight && (
-                  <span className="inline-block text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-4">
+                  <span className="inline-block text-[10px] sm:text-xs font-semibold tracking-wide text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-4">
                     {testimonial.highlight}
                   </span>
                 )}

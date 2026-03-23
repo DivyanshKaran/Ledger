@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import { trackError, trackEvent } from "@/lib/telemetry";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 interface AuthContextType {
   user: User | null;
@@ -53,11 +54,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string, displayName?: string) => {
+    const siteUrl = getSiteUrl() || window.location.origin;
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: `${siteUrl}/auth?mode=login`,
         data: { display_name: displayName },
       },
     });

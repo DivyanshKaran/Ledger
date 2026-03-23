@@ -1,6 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getSiteUrl } from "@/lib/siteUrl";
 
-const DEFAULT_REDIRECT = "/";
+const DEFAULT_REDIRECT = "/dashboard";
 
 function sanitizePath(input: string | null | undefined): string | null {
   if (!input) return null;
@@ -24,7 +25,8 @@ export function getRedirectTarget(searchParams: URLSearchParams, locationState: 
 export function buildOAuthRedirectUrl(nextPath: string): string {
   const safeNext = sanitizePath(nextPath) || DEFAULT_REDIRECT;
   const params = new URLSearchParams({ oauth: "1", next: safeNext });
-  return `${window.location.origin}/auth?${params.toString()}`;
+  const baseUrl = getSiteUrl() || window.location.origin;
+  return `${baseUrl}/auth?${params.toString()}`;
 }
 
 export function getAuthErrorFromParams(searchParams: URLSearchParams): string | null {

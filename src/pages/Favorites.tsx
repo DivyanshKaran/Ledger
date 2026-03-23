@@ -1,4 +1,3 @@
- import { useState } from "react";
  import { useNavigate } from "react-router-dom";
  import { motion } from "framer-motion";
  import { Heart, ArrowLeft, ChefHat, Clock, Users, Trash2 } from "lucide-react";
@@ -10,16 +9,21 @@
  import { Badge } from "@/components/ui/badge";
  import Navbar from "@/components/Navbar";
  import PageTransition from "@/components/PageTransition";
+ import PageSkeleton from "@/components/PageSkeleton";
 
  export default function Favorites() {
    const navigate = useNavigate();
    const { formatPrice } = useCurrency();
 
-   const { favoriteIds, toggleFavorite } = useCloudFavorites();
-   const { recipes: allRecipes } = useAllRecipes();
+   const { favoriteIds, toggleFavorite, loading: favoritesLoading } = useCloudFavorites();
+   const { recipes: allRecipes, loading: recipesLoading } = useAllRecipes();
 
    const favoriteRecipes = allRecipes.filter((r) => favoriteIds.has(r.id));
  
+  if (favoritesLoading || recipesLoading) {
+    return <PageSkeleton variant="favorites" />;
+  }
+
   return (
     <PageTransition>
     <div className="min-h-screen bg-background">
@@ -67,8 +71,8 @@
                    animate={{ opacity: 1, y: 0 }}
                    transition={{ delay: index * 0.05 }}
                    whileHover={{ y: -4 }}
-                   className="bg-card rounded-xl border border-border overflow-hidden cursor-pointer hover:border-primary/50 transition-all group relative"
-                 >
+                 className="bg-card rounded-2xl border border-border/70 overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-warm transition-all group relative"
+               >
                    {/* Remove button */}
                    <button
                      onClick={(e) => {
@@ -81,7 +85,7 @@
                    </button>
  
                    <div onClick={() => navigate(`/recipe/${recipe.id}`)}>
-                     <div className="aspect-[4/3] bg-muted relative overflow-hidden">
+                     <div className="aspect-[4/3] bg-muted relative overflow-hidden image-shell">
                        <ChefHat className="w-8 h-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-muted-foreground/30" />
                        <div className="absolute bottom-2 left-2">
                          <Badge variant="secondary" className="text-xs">

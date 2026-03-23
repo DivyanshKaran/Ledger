@@ -171,9 +171,9 @@ import { useCurrency } from "@/hooks/useCurrency";
                  {/* Recipes */}
                  {filteredRecipes.length > 0 && (
                    <div className="mb-4">
-                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 py-2">
-                       Recipes
-                     </p>
+                    <p className="text-[11px] font-semibold text-muted-foreground tracking-[0.16em] px-3 py-2">
+                      Recipes
+                    </p>
                      {filteredRecipes.map((recipe, index) => (
                        <motion.button
                          key={recipe.id}
@@ -214,9 +214,9 @@ import { useCurrency } from "@/hooks/useCurrency";
                  {/* Authors */}
                  {filteredAuthors.length > 0 && (
                    <div>
-                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 py-2">
-                       Authors
-                     </p>
+                    <p className="text-[11px] font-semibold text-muted-foreground tracking-[0.16em] px-3 py-2">
+                      Authors
+                    </p>
                      {filteredAuthors.map((author, index) => (
                        <motion.button
                          key={author.id}

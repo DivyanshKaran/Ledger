@@ -82,29 +82,41 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Rating Summary */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-card rounded-2xl border border-border p-6"
+        className="recipe-card p-5 sm:p-6"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <Star className="w-4 h-4 text-primary" />
+            Ratings
+          </div>
+          <span className="text-xs text-muted-foreground">
+            {ratingCount} {ratingCount === 1 ? "review" : "reviews"}
+          </span>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
           <div className="flex items-center gap-4">
-            <div className="text-center">
-              <p className="text-4xl font-display font-bold text-primary">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <span className="text-2xl font-display font-bold">
                 {averageRating > 0 ? averageRating.toFixed(1) : "—"}
-              </p>
+              </span>
+            </div>
+            <div className="space-y-1">
               <StarRating rating={averageRating} size="sm" />
-              <p className="text-sm text-muted-foreground mt-1">
-                {ratingCount} {ratingCount === 1 ? "review" : "reviews"}
+              <p className="text-xs text-muted-foreground">
+                Average rating
               </p>
             </div>
           </div>
 
           {user ? (
-            <div className="flex flex-col items-start sm:items-end gap-2">
-              <p className="text-sm font-medium">
+            <div className="flex flex-col items-start sm:items-end gap-1.5">
+              <p className="text-xs text-muted-foreground">
                 {userRating ? "Your rating" : "Rate this recipe"}
               </p>
               <StarRating 
@@ -115,7 +127,7 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
               />
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Sign in to rate this recipe
             </p>
           )}
@@ -127,9 +139,9 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-card rounded-2xl border border-border overflow-hidden"
+        className="recipe-card overflow-hidden"
       >
-        <div className="p-5 border-b border-border bg-muted/30">
+        <div className="p-4 sm:p-5 border-b border-border/70 bg-muted/20">
           <h3 className="font-display text-lg font-semibold flex items-center gap-2">
             <MessageSquare className="w-5 h-5 text-primary" />
             Comments
@@ -141,8 +153,8 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
 
         {/* Add Comment */}
         {user ? (
-          <div className="p-5 border-b border-border">
-            <div className="flex gap-3">
+          <div className="p-4 sm:p-5 border-b border-border/70">
+            <div className="flex flex-col sm:flex-row gap-3">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <User className="w-5 h-5 text-primary" />
               </div>
@@ -151,7 +163,7 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Share your thoughts on this recipe..."
-                  className="min-h-[80px] resize-none bg-background"
+                  className="min-h-[90px] resize-none bg-background"
                   maxLength={1000}
                 />
                 <div className="flex items-center justify-between">
@@ -172,23 +184,23 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
             </div>
           </div>
         ) : (
-          <div className="p-5 border-b border-border text-center">
-            <p className="text-muted-foreground">Sign in to leave a comment</p>
+          <div className="p-4 sm:p-5 border-b border-border/70 text-center">
+            <p className="text-sm text-muted-foreground">Sign in to leave a comment</p>
           </div>
         )}
 
         {/* Comments List */}
-        <div className="divide-y divide-border max-h-[400px] overflow-y-auto">
+        <div className="divide-y divide-border/60 max-h-[420px] overflow-y-auto">
           <AnimatePresence>
             {comments.length === 0 ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="p-8 text-center"
+                className="p-6 text-center"
               >
                 <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-3" />
-                <p className="text-muted-foreground">No comments yet</p>
-                <p className="text-sm text-muted-foreground">Be the first to share your thoughts!</p>
+                <p className="text-sm text-muted-foreground">No comments yet</p>
+                <p className="text-xs text-muted-foreground">Be the first to share your thoughts!</p>
               </motion.div>
             ) : (
               comments.map((comment, index) => (
@@ -198,7 +210,7 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: index * 0.05 }}
-                  className="p-5 hover:bg-muted/30 transition-colors"
+                  className="p-4 sm:p-5 hover:bg-muted/30 transition-colors"
                 >
                   <div className="flex gap-3">
                     <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
@@ -212,9 +224,9 @@ export default function RecipeReviews({ recipeId }: RecipeReviewsProps) {
                           {comment.display_name || "Anonymous"}
                         </span>
                         <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-xs text-muted-foreground">
-                            {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
-                          </span>
+                        <span className="text-[11px] text-muted-foreground">
+                          {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
+                        </span>
                           {currentUserId === comment.user_id && (
                             <Button
                               variant="ghost"

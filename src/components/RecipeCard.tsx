@@ -31,7 +31,7 @@ export default function RecipeCard({
       onClick={onClick}
     >
       {/* Image Container with Hover Zoom */}
-      <div className="hover-zoom relative aspect-[4/3]">
+      <div className="hover-zoom relative aspect-[4/3] image-shell">
         <img
           src={image}
           alt={title}
@@ -39,7 +39,7 @@ export default function RecipeCard({
         />
         
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Tags */}
         <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-wrap gap-1 sm:gap-2">
@@ -61,7 +61,7 @@ export default function RecipeCard({
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", delay: 0.2 }}
-          className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-primary px-2 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 shadow-lg"
+          className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-primary px-2 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 shadow-warm price-sheen"
         >
           <span className="text-xs sm:text-sm font-semibold text-primary-foreground">
             {formatPrice(estimatedCost)}

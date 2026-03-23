@@ -139,10 +139,10 @@ export default function GlobalTimer({ steps, recipeName }: GlobalTimerProps) {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="recipe-card p-6 bg-gradient-to-br from-card to-muted/30"
+        className="recipe-card p-4 sm:p-6 bg-gradient-to-br from-card to-muted/30"
       >
         {/* Master Controls */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0 mb-6">
           <div>
             <h3 className="font-display text-lg font-semibold flex items-center gap-2">
               <Timer className="w-5 h-5 text-primary" />
@@ -186,7 +186,7 @@ export default function GlobalTimer({ steps, recipeName }: GlobalTimerProps) {
             key={timeRemaining}
             initial={{ scale: 1.02 }}
             animate={{ scale: 1 }}
-            className={`text-6xl font-mono font-bold mb-4 ${
+            className={`text-4xl sm:text-6xl font-mono font-bold mb-4 ${
               timeRemaining < 60 && timeRemaining > 0
                 ? "text-accent animate-pulse"
                 : "text-foreground"
@@ -196,11 +196,11 @@ export default function GlobalTimer({ steps, recipeName }: GlobalTimerProps) {
           </motion.div>
 
           {/* Control Buttons */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
             <button
               onClick={() => setIsRunning(!isRunning)}
               disabled={currentStep?.duration === 0}
-              className={`w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-warm ${
+              className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all shadow-warm ${
                 isRunning
                   ? "bg-accent text-accent-foreground"
                   : "bg-primary text-primary-foreground"
@@ -216,7 +216,7 @@ export default function GlobalTimer({ steps, recipeName }: GlobalTimerProps) {
             <button
               onClick={skipToNext}
               disabled={currentStepIndex >= steps.length - 1}
-              className="w-12 h-12 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors disabled:opacity-50"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors disabled:opacity-50"
             >
               <SkipForward className="w-5 h-5" />
             </button>

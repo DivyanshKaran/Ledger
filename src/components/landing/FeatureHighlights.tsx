@@ -51,7 +51,7 @@ const features = [
 
 export default function FeatureHighlights() {
   return (
-    <section id="features" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
+    <section id="features" className="py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 bg-muted/10 border-y border-border/40 relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -69,7 +69,7 @@ export default function FeatureHighlights() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <span className="inline-block text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-4">
+          <span className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.18em] text-primary/80 mb-4">
             Everything you need
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold mb-5 max-w-3xl mx-auto leading-tight">
@@ -94,7 +94,7 @@ export default function FeatureHighlights() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative h-full bg-card rounded-2xl border border-border p-6 sm:p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-warm-lg">
+                <div className="relative h-full bg-card rounded-2xl border border-border/70 p-5 sm:p-8 shadow-warm transition-all duration-500 hover:border-primary/30 hover:shadow-warm-lg">
                   {/* Gradient glow on hover */}
                   <div className={`absolute -inset-px rounded-2xl bg-gradient-to-br ${feature.accent} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500 -z-10`} />
                   

@@ -37,8 +37,8 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
           alt="Delicious food spread" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70 sm:via-background/90 sm:to-background/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/55 sm:via-background/80 sm:to-background/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
@@ -60,7 +60,7 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] mb-4 sm:mb-6"
+              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] mb-4 sm:mb-6 text-shadow-soft"
             >
               Cook with
               <br />
@@ -169,4 +169,3 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
     </section>
   );
 }
-

@@ -133,7 +133,7 @@ export default function CustomRecipeForm({ onSave, onClose, editRecipe }: Custom
         </div>
 
         {/* Section Tabs */}
-        <div className="flex gap-2 p-4 border-b border-border overflow-x-auto flex-shrink-0">
+        <div className="flex flex-wrap gap-2 p-4 border-b border-border">
           {sections.map((section) => {
             const Icon = section.icon;
             return (

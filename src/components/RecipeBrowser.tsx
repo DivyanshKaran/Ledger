@@ -178,7 +178,7 @@ export default function RecipeBrowser({
           </div>
 
           {/* Cuisine Filter Pills - Scrollable on mobile */}
-          <div className="flex gap-2 mt-3 sm:mt-4 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+          <div className="flex flex-wrap gap-2 mt-3 sm:mt-4 pb-2">
             {CUISINES.map((cuisine) => {
               const isActive = selectedCuisine === cuisine;
               const count = cuisine === "All" 
@@ -209,7 +209,7 @@ export default function RecipeBrowser({
           </div>
 
           {/* Difficulty Filter */}
-          <div className="flex gap-2 mt-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+          <div className="flex flex-wrap gap-2 mt-3 pb-2">
             <span className="text-xs text-muted-foreground self-center flex-shrink-0 pr-2">Difficulty:</span>
             {DIFFICULTIES.map((difficulty) => {
               const isActive = selectedDifficulty === difficulty;
@@ -229,7 +229,7 @@ export default function RecipeBrowser({
           </div>
 
           {/* Category Filter */}
-          <div className="flex gap-2 mt-2 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
+          <div className="flex flex-wrap gap-2 mt-2 pb-2">
             <span className="text-xs text-muted-foreground self-center flex-shrink-0 pr-2">Category:</span>
             {CATEGORIES.map((category) => {
               const isActive = selectedCategory === category;
@@ -256,7 +256,7 @@ export default function RecipeBrowser({
         {/* Recipe Grid */}
         <div className={
           viewMode === "grid" 
-            ? "grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+            ? "grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
             : "flex flex-col gap-3 sm:gap-4"
         }>
           <AnimatePresence mode="popLayout">
@@ -276,10 +276,10 @@ export default function RecipeBrowser({
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ delay: index * 0.03 }}
                     onClick={() => handleRecipeClick(recipe)}
-                    className="bg-card rounded-xl border border-border overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                    className="bg-card rounded-2xl border border-border/70 overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-warm transition-all group"
                   >
                     <div className="flex">
-                      <div className="w-24 sm:w-32 md:w-48 flex-shrink-0">
+                      <div className="w-24 sm:w-32 md:w-48 flex-shrink-0 relative image-shell">
                         <img
                           src={imageUrl}
                           alt={recipe.title}
@@ -339,10 +339,10 @@ export default function RecipeBrowser({
                   transition={{ delay: index * 0.03 }}
                   whileHover={{ y: -4 }}
                   onClick={() => handleRecipeClick(recipe)}
-                  className="bg-card rounded-xl sm:rounded-2xl border border-border overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all group"
+                  className="bg-card rounded-2xl border border-border/70 overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-warm-lg transition-all group"
                 >
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden image-shell">
                     <img
                       src={imageUrl}
                       alt={recipe.title}
@@ -350,7 +350,7 @@ export default function RecipeBrowser({
                     />
                     
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Top Badges */}
                     <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex gap-1 sm:gap-2">
@@ -478,7 +478,7 @@ export default function RecipeBrowser({
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-card border border-border rounded-xl shadow-2xl px-4 sm:px-6 py-3 flex items-center gap-3 sm:gap-4"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-card border border-border rounded-xl shadow-2xl px-3 sm:px-6 py-3 flex flex-wrap items-center justify-center gap-2 sm:gap-4 w-[calc(100%-2rem)] sm:w-auto"
             >
               <GitCompareArrows className="w-5 h-5 text-primary" />
               <span className="text-sm font-medium">{compareIds.size} selected</span>

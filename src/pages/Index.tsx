@@ -12,11 +12,11 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import CTASection from "@/components/landing/CTASection";
 import FAQ from "@/components/landing/FAQ";
-import MealPlanner from "@/components/MealPlanner";
 import GlobalSearch from "@/components/GlobalSearch";
 import AICookingChat from "@/components/AICookingChat";
 import BackToTop from "@/components/BackToTop";
 import ActivityFeed from "@/components/ActivityFeed";
+import PageSkeleton from "@/components/PageSkeleton";
 import { RECIPES, Recipe } from "@/data/recipes";
 import { useAuth } from "@/hooks/useAuth";
 import { useCloudCustomRecipes } from "@/hooks/useCloudData";
@@ -25,11 +25,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { trackError, trackEvent } from "@/lib/telemetry";
 import { toast } from "sonner";
 
-type ViewMode = "home" | "planner";
-
-
 export default function Index() {
-  const [viewMode, setViewMode] = useState<ViewMode>("home");
   const [searchOpen, setSearchOpen] = useState(false);
   const [showMobileActivity, setShowMobileActivity] = useState(false);
   const recipeSectionRef = useRef<HTMLDivElement>(null);
@@ -37,9 +33,9 @@ export default function Index() {
   const navigate = useNavigate();
 
   const { user } = useAuth();
-   const { authors } = useAuthors();
+  const { authors, loading: authorsLoading } = useAuthors();
 
-  const { customRecipes } = useCloudCustomRecipes();
+  const { customRecipes, loading: customRecipesLoading } = useCloudCustomRecipes();
 
   // Combine built-in and custom recipes
   const allRecipes = [...RECIPES, ...customRecipes];
@@ -149,17 +145,7 @@ export default function Index() {
   };
 
   const handleLogoClick = () => {
-    setViewMode("home");
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleOpenPlanner = () => {
-    setViewMode("planner");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleClosePlanner = () => {
-    setViewMode("home");
   };
 
   const handleShowFavorites = () => {
@@ -186,6 +172,10 @@ export default function Index() {
      return () => window.removeEventListener("keydown", handleKeyDown);
    }, []);
 
+  if (authorsLoading || customRecipesLoading) {
+    return <PageSkeleton variant="landing" />;
+  }
+
   return (
       <PageTransition>
       <>
@@ -202,21 +192,12 @@ export default function Index() {
        </AnimatePresence>
 
        <AnimatePresence mode="wait">
-      {viewMode === "planner" ? (
-        <MealPlanner
-          key="planner"
-          recipes={allRecipes}
-          onClose={handleClosePlanner}
-          onSelectRecipe={handleSelectRecipe}
-        />
-      ) : (
         <div key="home" className="min-h-screen bg-background">
           <Navbar 
             onLogoClick={handleLogoClick}
-            onOpenPlanner={handleOpenPlanner}
             onShowFavorites={handleShowFavorites}
             onShowCustomRecipes={handleShowCustomRecipes}
-             onOpenSearch={() => setSearchOpen(true)}
+            onOpenSearch={() => setSearchOpen(true)}
           />
           <HeroSection onGetStarted={handleGetStarted} />
           
@@ -311,7 +292,6 @@ export default function Index() {
               </div>
             </footer>
         </div>
-      )}
      </AnimatePresence>
 
      {/* AI Cooking Chat Widget */}

@@ -27,15 +27,15 @@ export default function DietaryFilters({ selected, onChange }: DietaryFiltersPro
   };
 
   return (
-    <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
-      <span className="text-xs text-muted-foreground self-center flex-shrink-0 pr-1">Diet:</span>
+    <div className="flex flex-wrap gap-2 pb-1">
+      <span className="text-xs text-muted-foreground self-center pr-1">Diet:</span>
       {DIETARY_OPTIONS.map(option => {
         const isActive = selected.includes(option.value);
         return (
           <Badge
             key={option.value}
             variant={isActive ? "default" : "outline"}
-            className={`cursor-pointer flex-shrink-0 text-[10px] sm:text-xs h-6 px-2 gap-1 transition-all hover:scale-105 ${
+            className={`cursor-pointer text-[10px] sm:text-xs h-6 px-2 gap-1 transition-all hover:scale-105 ${
               isActive ? "shadow-sm shadow-primary/20" : "hover:bg-muted"
             }`}
             onClick={() => toggleTag(option.value)}

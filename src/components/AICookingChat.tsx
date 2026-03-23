@@ -77,7 +77,7 @@ export default function AICookingChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.92 }}
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className="fixed bottom-5 right-5 z-50 w-[400px] max-w-[calc(100vw-2.5rem)] h-[560px] max-h-[calc(100vh-5rem)] bg-card border border-border/60 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-5 right-5 z-50 w-[400px] max-w-[calc(100%-2.5rem)] h-[560px] max-h-[calc(100vh-5rem)] bg-card border border-border/60 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/20">

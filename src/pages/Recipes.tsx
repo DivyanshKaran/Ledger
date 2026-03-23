@@ -1,19 +1,18 @@
-import { useState, useRef, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import RecipeBrowser from "@/components/RecipeBrowser";
 import PageTransition from "@/components/PageTransition";
 import AICookingChat from "@/components/AICookingChat";
+import PageSkeleton from "@/components/PageSkeleton";
 import { useCloudFavorites, useCloudCustomRecipes } from "@/hooks/useCloudData";
 import { useAllRecipes } from "@/hooks/useRecipes";
 
 export default function Recipes() {
   const navigate = useNavigate();
 
-  const { favoriteIds, toggleFavorite } = useCloudFavorites();
+  const { favoriteIds, toggleFavorite, loading: favoritesLoading } = useCloudFavorites();
   const { removeCustomRecipe } = useCloudCustomRecipes();
-  const { recipes: allRecipes } = useAllRecipes();
+  const { recipes: allRecipes, loading: recipesLoading } = useAllRecipes();
 
   const handleSelectRecipe = (recipe: any) => {
     navigate(`/recipe/${recipe.id}`);
@@ -22,6 +21,10 @@ export default function Recipes() {
   const handleLogoClick = () => {
     navigate("/");
   };
+
+  if (favoritesLoading || recipesLoading) {
+    return <PageSkeleton variant="recipes" />;
+  }
 
   return (
     <PageTransition>
